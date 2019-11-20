@@ -20,11 +20,12 @@ package nl.knaw.huygens.alexandria.creole
  * #L%
      */
 
-import org.assertj.core.api.Assertions.assertThat
+import nl.knaw.huygens.alexandria.creole.CreoleAssertions.assertThat
 import nl.knaw.huygens.alexandria.lmnl.importer.LMNLImporter2
 import nl.knaw.huygens.alexandria.lmnl.importer.LMNLSyntaxError
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.filefilter.IOFileFilter
+import org.assertj.core.api.Assertions
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -46,7 +47,7 @@ class InvalidLMNLTest(private val basename: String) : CreoleTest() {
     @Throws(IOException::class)
     private fun validateLMNL(basename: String) {
         val xml = FileUtils.readFileToString(File("$ROOTDIR$basename.creole"), "UTF-8")
-        assertThat(xml).isNotEmpty()
+        Assertions.assertThat(xml).isNotEmpty()
         LOG.info("testing {}.creole", basename)
         LOG.info("{}", xml)
         val schema = SchemaImporter.fromXML(xml)
@@ -60,7 +61,7 @@ class InvalidLMNLTest(private val basename: String) : CreoleTest() {
     }
 
     companion object {
-        private val ROOTDIR = "src/test/resources/"
+        private const val ROOTDIR = "src/test/resources/"
         private val LMNL_DIR = ROOTDIR + "invalid/"
         private val LOG = LoggerFactory.getLogger(InvalidLMNLTest::class.java)
 

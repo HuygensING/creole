@@ -46,14 +46,14 @@ class Concur(pattern1: Pattern, pattern2: Pattern) : PatternWithTwoPatternParame
         )
     }
 
-    override fun startTagDeriv(qn: Basics.QName, id: Basics.Id): Pattern {
+    override fun startTagDeriv(qName: Basics.QName, id: Basics.Id): Pattern {
         // startTagDeriv (Concur p1 p2) qn id =
         //   let d1 = startTagDeriv p1 qn id
         //       d2 = startTagDeriv p2 qn id
         //   in choice (choice (concur d1 p2) (concur p1 d2))
         //             (concur d1 d2)
-        val d1 = pattern1.startTagDeriv(qn, id)
-        val d2 = pattern2.startTagDeriv(qn, id)
+        val d1 = pattern1.startTagDeriv(qName, id)
+        val d2 = pattern2.startTagDeriv(qName, id)
         return choice(
                 choice(
                         concur(d1, pattern2),
@@ -63,15 +63,15 @@ class Concur(pattern1: Pattern, pattern2: Pattern) : PatternWithTwoPatternParame
         )
     }
 
-    override fun endTagDeriv(qn: Basics.QName, id: Basics.Id): Pattern {
+    override fun endTagDeriv(qName: Basics.QName, id: Basics.Id): Pattern {
         // endTagDeriv (Concur p1 p2) qn id =
         //   let d1 = endTagDeriv p1 qn id
         //       d2 = endTagDeriv p2 qn id
         //   in choice (choice (concur d1 p2)
         //                     (concur p1 d2))
         //             (concur d1 d2)
-        val d1 = pattern1.endTagDeriv(qn, id)
-        val d2 = pattern2.endTagDeriv(qn, id)
+        val d1 = pattern1.endTagDeriv(qName, id)
+        val d2 = pattern2.endTagDeriv(qName, id)
         return choice(
                 choice(
                         concur(d1, pattern2),

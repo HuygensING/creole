@@ -37,17 +37,17 @@ class EndRange(val qName: Basics.QName, val id: Basics.Id) : AbstractPattern() {
         onlyAnnotations = false
     }
 
-    override fun endTagDeriv(qn: Basics.QName, id2: Basics.Id): Pattern {
+    override fun endTagDeriv(qName1: Basics.QName, id2: Basics.Id): Pattern {
         // endTagDeriv (EndRange (QName ns1 ln1) id1)
         //             (QName ns2 ln2) id2 =
         //   if id1 == id2 ||
         //      (id1 == '' && id2 == '' && ns1 == ns2 && ln1 == ln2)
         //   then Empty
         //   else NotAllowed
-        val ns1 = qn.uri
-        val ln1 = qn.localName
-        val ns2 = qn.uri
-        val ln2 = qn.localName
+        val ns1 = qName1.uri
+        val ln1 = qName1.localName
+        val ns2 = qName1.uri
+        val ln2 = qName1.localName
         return if (id == id2 || id.isEmpty && id2.isEmpty && ns1 == ns2 && ln1 == ln2)
             empty()
         else

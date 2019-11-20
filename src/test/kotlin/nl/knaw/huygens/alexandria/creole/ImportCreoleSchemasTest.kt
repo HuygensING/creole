@@ -46,7 +46,7 @@ class ImportCreoleSchemasTest(private val basename: String) : CreoleTest() {
     @Throws(IOException::class)
     private fun processCreoleFile(basename: String) {
         val xml = FileUtils.readFileToString(File("$ROOTDIR$basename.creole"), "UTF-8")
-        Assertions.assertThat(xml).isNotEmpty()
+        assertThat(xml).isNotEmpty()
         LOG.info("testing {}.creole", basename)
         LOG.info("{}", xml)
         val schema = SchemaImporter.fromXML(xml)
@@ -54,7 +54,7 @@ class ImportCreoleSchemasTest(private val basename: String) : CreoleTest() {
     }
 
     companion object {
-        private val ROOTDIR = "src/test/resources/"
+        private const val ROOTDIR = "src/test/resources/"
         private val LOG = LoggerFactory.getLogger(ImportCreoleSchemasTest::class.java)
 
         private val CREOLE_FILE_FILTER = object : IOFileFilter {

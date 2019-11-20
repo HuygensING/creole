@@ -50,43 +50,43 @@ class Group(pattern1: Pattern, pattern2: Pattern) : PatternWithTwoPatternParamet
             p
     }
 
-    override fun startTagDeriv(qn: Basics.QName, id: Basics.Id): Pattern {
+    override fun startTagDeriv(qName: Basics.QName, id: Basics.Id): Pattern {
         // startTagDeriv (Group p1 p2) qn id =
         //   let d = group (startTagDeriv p1 qn id) p2
         //   in if nullable p1 then choice d (startTagDeriv p2 qn id)
         //                     else d
-        val d = group(pattern1.startTagDeriv(qn, id), pattern2)
+        val d = group(pattern1.startTagDeriv(qName, id), pattern2)
         return if (pattern1.isNullable)
-            choice(d, pattern2.startTagDeriv(qn, id))
+            choice(d, pattern2.startTagDeriv(qName, id))
         else
             d
     }
 
-    override fun endTagDeriv(qn: Basics.QName, id: Basics.Id): Pattern {
+    override fun endTagDeriv(qName: Basics.QName, id: Basics.Id): Pattern {
         // endTagDeriv (Group p1 p2) qn id =
         //   let p = group (endTagDeriv p1 qn id) p2
         //   if nullable p1 then choice p
         //                             (endTagDeriv p2 qn id)
         //                  else p
-        val p = group(pattern1.endTagDeriv(qn, id), pattern2)
+        val p = group(pattern1.endTagDeriv(qName, id), pattern2)
         return if (pattern1.isNullable)
-            choice(p, pattern2.endTagDeriv(qn, id))
+            choice(p, pattern2.endTagDeriv(qName, id))
         else
             p
     }
 
-    override fun startAnnotationDeriv(qn: Basics.QName): Pattern {
-        val p = group(pattern1, pattern2.startAnnotationDeriv(qn))
+    override fun startAnnotationDeriv(qName: Basics.QName): Pattern {
+        val p = group(pattern1, pattern2.startAnnotationDeriv(qName))
         return if (pattern1.allowsAnnotations())
             nullPattern()
         else
             p
     }
 
-    override fun endAnnotationDeriv(qn: Basics.QName): Pattern {
-        val p = group(pattern1.endAnnotationDeriv(qn), pattern2)
+    override fun endAnnotationDeriv(qName: Basics.QName): Pattern {
+        val p = group(pattern1.endAnnotationDeriv(qName), pattern2)
         return if (pattern1.isNullable)
-            choice(p, pattern2.endAnnotationDeriv(qn))
+            choice(p, pattern2.endAnnotationDeriv(qName))
         else
             p
     }

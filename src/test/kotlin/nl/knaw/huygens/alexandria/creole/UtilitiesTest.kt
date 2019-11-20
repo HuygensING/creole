@@ -20,14 +20,15 @@ package nl.knaw.huygens.alexandria.creole
  * #L%
      */
 
-import org.assertj.core.api.Assertions.assertThat
 import nl.knaw.huygens.alexandria.creole.Basics.id
 import nl.knaw.huygens.alexandria.creole.Constructors.choice
 import nl.knaw.huygens.alexandria.creole.Constructors.element
 import nl.knaw.huygens.alexandria.creole.Constructors.empty
 import nl.knaw.huygens.alexandria.creole.Constructors.group
 import nl.knaw.huygens.alexandria.creole.Constructors.text
+import nl.knaw.huygens.alexandria.creole.CreoleAssertions.assertThat
 import nl.knaw.huygens.alexandria.creole.patterns.*
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.slf4j.LoggerFactory
 

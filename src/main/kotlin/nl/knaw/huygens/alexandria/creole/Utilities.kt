@@ -27,8 +27,8 @@ import org.apache.commons.lang3.StringUtils
 object Utilities {
 
     //  private static final String INDENT = "  ";
-    private val INDENT = "| "
-    private val ELLIPSES = "..."
+    private const val INDENT = "| "
+    private const val ELLIPSES = "..."
 
     //  static Set<Event> expectedEvents(Pattern pattern) {
     //    Set<Event> expectedEvents = new HashSet<>();

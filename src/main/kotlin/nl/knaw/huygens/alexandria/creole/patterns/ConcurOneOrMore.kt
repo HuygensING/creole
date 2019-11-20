@@ -42,22 +42,22 @@ class ConcurOneOrMore(pattern: Pattern) : PatternWithOnePatternParameter(pattern
         )
     }
 
-    override fun startTagDeriv(qn: Basics.QName, id: Basics.Id): Pattern {
+    override fun startTagDeriv(qName: Basics.QName, id: Basics.Id): Pattern {
         // startTagDeriv (ConcurOneOrMore p) qn id =
         //   concur (startTagDeriv p qn id)
         //          (choice (ConcurOneOrMore p) anyContent)
         return concur(
-                pattern.startTagDeriv(qn, id),
+                pattern.startTagDeriv(qName, id),
                 choice(ConcurOneOrMore(pattern), anyContent())
         )
     }
 
-    override fun endTagDeriv(qn: Basics.QName, id: Basics.Id): Pattern {
+    override fun endTagDeriv(qName: Basics.QName, id: Basics.Id): Pattern {
         // endTagDeriv (ConcurOneOrMore p) qn id =
         //   concur (endTagDeriv p qn id)
         //          (choice (ConcurOneOrMore p) anyContent)
         return concur(
-                pattern.endTagDeriv(qn, id),
+                pattern.endTagDeriv(qName, id),
                 choice(ConcurOneOrMore(pattern), anyContent())
         )
     }

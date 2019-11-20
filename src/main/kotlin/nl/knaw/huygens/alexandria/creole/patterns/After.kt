@@ -50,21 +50,21 @@ class After(pattern1: Pattern, pattern2: Pattern) : PatternWithTwoPatternParamet
         )
     }
 
-    override fun startTagDeriv(qn: Basics.QName, id: Basics.Id): Pattern {
+    override fun startTagDeriv(qName: Basics.QName, id: Basics.Id): Pattern {
         // startTagDeriv (After p1 p2) qn id =
         //   after (startTagDeriv p1 qn id)
         //         p2
         return after(
-                pattern1.startTagDeriv(qn, id),
+                pattern1.startTagDeriv(qName, id),
                 pattern2
         )
     }
 
-    override fun endTagDeriv(qn: Basics.QName, id: Basics.Id): Pattern {
+    override fun endTagDeriv(qName: Basics.QName, id: Basics.Id): Pattern {
         // endTagDeriv (After p1 p2) qn id =
         //   after (endTagDeriv p1 qn id) p2
         return after(
-                pattern1.endTagDeriv(qn, id),
+                pattern1.endTagDeriv(qName, id),
                 pattern2
         )
     }

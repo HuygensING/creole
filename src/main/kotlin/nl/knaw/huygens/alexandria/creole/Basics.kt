@@ -97,9 +97,9 @@ object Basics {
             return hashCode
         }
 
-        override fun equals(obj: Any?): Boolean {
-            return (obj!!.javaClass == this.javaClass
-                    && value == (obj as StringWrapper).value)
+        override fun equals(other: Any?): Boolean {
+            return (other!!.javaClass == this.javaClass
+                    && value == (other as StringWrapper).value)
         }
 
         override fun toString(): String {

@@ -140,6 +140,15 @@ object NameClasses {
             return hashCode
         }
 
+        override fun equals(other: Any?): Boolean {
+            if (this === other) return true
+            if (other !is AbstractNameClass) return false
+
+            if (hashCode != other.hashCode) return false
+
+            return true
+        }
+
         companion object {
             fun setHashCode(abstractNameClass: AbstractNameClass, hashCode: Int) {
                 abstractNameClass.hashCode = hashCode

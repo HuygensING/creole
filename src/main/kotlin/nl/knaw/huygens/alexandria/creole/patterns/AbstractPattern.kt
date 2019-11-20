@@ -82,6 +82,19 @@ abstract class AbstractPattern : Pattern {
         return hashcode
     }
 
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is AbstractPattern) return false
+
+        if (nullable != other.nullable) return false
+        if (allowsText != other.allowsText) return false
+        if (allowsAnnotations != other.allowsAnnotations) return false
+        if (onlyAnnotations != other.onlyAnnotations) return false
+        if (hashcode != other.hashcode) return false
+
+        return true
+    }
+
     companion object {
         fun setHashcode(abstractPattern: AbstractPattern, hashcode: Int) {
             Preconditions.checkState(hashcode != 0, "hashCode should not be 0!")

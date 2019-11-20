@@ -35,4 +35,11 @@ abstract class PatternWithTwoPatternParameters internal constructor(val pattern1
                 && pattern1 == (other as PatternWithTwoPatternParameters).pattern1
                 && pattern2 == other.pattern2)
     }
+
+    override fun hashCode(): Int {
+        var result = super.hashCode()
+        result = 31 * result + pattern1.hashCode()
+        result = 31 * result + pattern2.hashCode()
+        return result
+    }
 }

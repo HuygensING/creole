@@ -20,7 +20,7 @@ package nl.knaw.huygens.alexandria.creole
  * #L%
      */
 
-import org.assertj.core.api.Assertions.assertThat
+import nl.knaw.huygens.alexandria.creole.CreoleAssertions.assertThat
 import nl.knaw.huygens.alexandria.creole.Basics.qName
 import nl.knaw.huygens.alexandria.creole.Constructors.choice
 import nl.knaw.huygens.alexandria.creole.Constructors.concur
