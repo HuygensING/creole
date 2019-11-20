@@ -21,7 +21,6 @@ package nl.knaw.huygens.alexandria.creole
      */
 
 import nl.knaw.huygens.alexandria.creole.CreoleAssertions.assertThat
-import nl.knaw.huygens.alexandria.lmnl.importer.LMNLImporter2
 import nl.knaw.huygens.alexandria.lmnl.importer.LMNLSyntaxError
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.filefilter.IOFileFilter
@@ -57,7 +56,7 @@ class ValidLMNLTest(private val basename: String) : CreoleTest() {
 
         val lmnl = FileUtils.readFileToString(File("$LMNL_DIR$basename.lmnl"), "UTF-8")
         LOG.info("lmnl=\n{}", lmnl)
-        val events = LMNLImporter2().importLMNL(lmnl)
+        val events = LMNLImporter().importLMNL(lmnl)
         val validator = Validator.ofPattern(schema)
         val result = validator.validate(events)
         assertThat(result).isSuccess
