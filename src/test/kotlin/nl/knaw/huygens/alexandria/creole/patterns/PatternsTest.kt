@@ -20,10 +20,10 @@ package nl.knaw.huygens.alexandria.creole.patterns
  * #L%
      */
 
-import org.assertj.core.api.Assertions.assertThat
 import nl.knaw.huygens.alexandria.creole.CreoleTest
 import nl.knaw.huygens.alexandria.creole.NameClass
 import nl.knaw.huygens.alexandria.creole.NameClasses.name
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import java.util.*
 

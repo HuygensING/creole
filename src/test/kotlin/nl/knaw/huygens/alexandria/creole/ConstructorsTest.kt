@@ -31,8 +31,8 @@ import nl.knaw.huygens.alexandria.creole.Constructors.partition
 import nl.knaw.huygens.alexandria.creole.patterns.*
 import nl.knaw.huygens.alexandria.creole.patterns.Patterns.EMPTY
 import nl.knaw.huygens.alexandria.creole.patterns.Patterns.NOT_ALLOWED
-import org.junit.Test
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.Test
 
 
 class ConstructorsTest : CreoleTest() {

@@ -20,7 +20,6 @@ package nl.knaw.huygens.alexandria.creole
  * #L%
      */
 
-import nl.knaw.huygens.alexandria.creole.CreoleAssertions.assertThat
 import nl.knaw.huygens.alexandria.creole.Basics.qName
 import nl.knaw.huygens.alexandria.creole.Constructors.choice
 import nl.knaw.huygens.alexandria.creole.Constructors.concur
@@ -34,6 +33,7 @@ import nl.knaw.huygens.alexandria.creole.Constructors.oneOrMore
 import nl.knaw.huygens.alexandria.creole.Constructors.range
 import nl.knaw.huygens.alexandria.creole.Constructors.text
 import nl.knaw.huygens.alexandria.creole.Constructors.zeroOrMore
+import nl.knaw.huygens.alexandria.creole.CreoleAssertions.assertThat
 import nl.knaw.huygens.alexandria.creole.NameClasses.name
 import nl.knaw.huygens.alexandria.creole.events.Events
 import nl.knaw.huygens.tei.Document
