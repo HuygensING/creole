@@ -61,7 +61,7 @@ class InvalidLMNLTest(private val basename: String) : CreoleTest() {
 
     companion object {
         private const val ROOTDIR = "src/test/resources/"
-        private val LMNL_DIR = ROOTDIR + "invalid/"
+        private const val LMNL_DIR = ROOTDIR + "invalid/"
         private val LOG = LoggerFactory.getLogger(InvalidLMNLTest::class.java)
 
         private val LMNL_FILE_FILTER = object : IOFileFilter {

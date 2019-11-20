@@ -198,7 +198,7 @@ class LMNLImporter {
             eventList.add(EndTagOpenEvent(qName, id))
         }
 
-        fun addEndTagCloseEvent(markup: Markup?) {
+        private fun addEndTagCloseEvent(markup: Markup?) {
             Preconditions.checkNotNull(markup)
             val qName = getQName(markup)
             val id = getId(markup)
@@ -235,7 +235,7 @@ class LMNLImporter {
             eventList.add(endAnnotationOpenEvent)
         }
 
-        fun addEndAnnotationCloseEvent(tag: String?) {
+        private fun addEndAnnotationCloseEvent(tag: String?) {
             val endAnnotationCloseEvent: Event = endAnnotationCloseEvent(qName(tag!!))
             eventList.add(endAnnotationCloseEvent)
         }
@@ -279,7 +279,7 @@ class LMNLImporter {
             val errors = errorListener.errors.stream().collect(Collectors.joining("\n"))
             errorMsg += "\n\nTokenizing errors:\n$errors"
         }
-        if (!errorMsg.isEmpty()) {
+        if (errorMsg.isNotEmpty()) {
             throw LMNLSyntaxError(errorMsg)
         }
         return context.getEventList()

@@ -20,11 +20,10 @@ package nl.knaw.huygens.alexandria.creole
  * #L%
  */
 
-import org.assertj.core.api.Assertions.assertThat
 import nl.knaw.huygens.alexandria.lmnl.importer.LMNLSyntaxError
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.filefilter.IOFileFilter
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized

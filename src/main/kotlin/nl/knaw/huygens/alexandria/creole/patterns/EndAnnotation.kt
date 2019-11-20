@@ -22,7 +22,7 @@ package nl.knaw.huygens.alexandria.creole.patterns
 
 import nl.knaw.huygens.alexandria.creole.NameClass
 
-class EndAnnotation(internal val nameClass: NameClass) : AbstractPattern() {
+class EndAnnotation(private val nameClass: NameClass) : AbstractPattern() {
 
     init {
         Companion.setHashcode(this, javaClass.hashCode() + nameClass.hashCode())

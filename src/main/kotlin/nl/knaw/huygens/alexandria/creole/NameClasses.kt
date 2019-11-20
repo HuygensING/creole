@@ -91,7 +91,7 @@ object NameClasses {
         return NsNameExcept(uri, nameClass)
     }
 
-    class NsNameExcept(val uri: Basics.Uri, val nameClass: NameClass) : AbstractNameClass() {
+    class NsNameExcept(private val uri: Basics.Uri, private val nameClass: NameClass) : AbstractNameClass() {
 
         override fun contains(qName: Basics.QName): Boolean {
             return (uri == qName.uri && !nameClass.contains(qName))
@@ -120,7 +120,7 @@ object NameClasses {
         return NameClassChoice(nameClass1, nameClass2)
     }
 
-    class NameClassChoice(val nameClass1: NameClass, val nameClass2: NameClass) : AbstractNameClass() {
+    class NameClassChoice(private val nameClass1: NameClass, private val nameClass2: NameClass) : AbstractNameClass() {
 
         override fun contains(qName: Basics.QName): Boolean {
             return (nameClass1.contains(qName)
