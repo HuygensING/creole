@@ -1,10 +1,5 @@
-.metadata
-.settings
-.classpath
-.project
-.idea
-*.iml
-**/target
-out/*
-**/dependency-reduced-pom.xml
-main/out
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
