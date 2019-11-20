@@ -2,7 +2,7 @@ package nl.knaw.huygens.alexandria.creole.patterns
 
 /*-
  * #%L
- * alexandria-markup-core
+ * creole
  * =======
  * Copyright (C) 2016 - 2019 HuC DI (KNAW)
  * =======
@@ -37,21 +37,21 @@ class Partition(pattern: Pattern) : PatternWithOnePatternParameter(pattern) {
         )
     }
 
-    override fun startTagDeriv(qn: Basics.QName, id: Basics.Id): Pattern {
+    override fun startTagDeriv(qName: Basics.QName, id: Basics.Id): Pattern {
         // startTagDeriv (Partition p) qn id =
         //   after (startTagDeriv p qn id) Empty
         return after(
-                pattern.startTagDeriv(qn, id),
+                pattern.startTagDeriv(qName, id),
                 empty()
         )
     }
 
-    override fun endTagDeriv(qn: Basics.QName, id: Basics.Id): Pattern {
+    override fun endTagDeriv(qName: Basics.QName, id: Basics.Id): Pattern {
         // endTagDeriv (Partition p) qn id =
         //   after (endTagDeriv p qn id)
         //         Empty
         return after(
-                pattern.endTagDeriv(qn, id),
+                pattern.endTagDeriv(qName, id),
                 empty()
         )
     }

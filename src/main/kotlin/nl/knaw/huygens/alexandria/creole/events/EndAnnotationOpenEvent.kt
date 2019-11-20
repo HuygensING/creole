@@ -2,7 +2,7 @@ package nl.knaw.huygens.alexandria.creole.events
 
 /*-
  * #%L
- * alexandria-markup-core
+ * creole
  * =======
  * Copyright (C) 2016 - 2019 HuC DI (KNAW)
  * =======
@@ -21,12 +21,11 @@ package nl.knaw.huygens.alexandria.creole.events
  */
 import nl.knaw.huygens.alexandria.creole.Basics
 import nl.knaw.huygens.alexandria.creole.Pattern
-import sun.reflect.generics.reflectiveObjects.NotImplementedException
 
 class EndAnnotationOpenEvent internal constructor(qName: Basics.QName) : AnnotationEvent(qName) {
 
     override fun eventDeriv(p: Pattern): Pattern {
-        throw NotImplementedException()
+        TODO()
     }
 
     override fun toString(): String {

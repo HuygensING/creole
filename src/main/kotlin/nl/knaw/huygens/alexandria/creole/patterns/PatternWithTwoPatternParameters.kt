@@ -2,7 +2,7 @@ package nl.knaw.huygens.alexandria.creole.patterns
 
 /*-
  * #%L
- * alexandria-markup-core
+ * creole
  * =======
  * Copyright (C) 2016 - 2019 HuC DI (KNAW)
  * =======
@@ -30,9 +30,9 @@ abstract class PatternWithTwoPatternParameters internal constructor(val pattern1
         Companion.setHashcode(this, javaClass.hashCode() + pattern1.hashCode() * pattern2.hashCode())
     }
 
-    override fun equals(obj: Any?): Boolean {
-        return (obj!!.javaClass == this.javaClass
-                && pattern1 == (obj as PatternWithTwoPatternParameters).pattern1
-                && pattern2 == obj.pattern2)
+    override fun equals(other: Any?): Boolean {
+        return (other!!.javaClass == this.javaClass
+                && pattern1 == (other as PatternWithTwoPatternParameters).pattern1
+                && pattern2 == other.pattern2)
     }
 }

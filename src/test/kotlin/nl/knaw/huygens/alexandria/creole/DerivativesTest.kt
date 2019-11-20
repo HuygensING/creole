@@ -2,7 +2,7 @@ package nl.knaw.huygens.alexandria.creole
 
 /*
  * #%L
- * alexandria-markup-core
+ * creole
  * =======
  * Copyright (C) 2016 - 2019 HuC DI (KNAW)
  * =======
@@ -20,7 +20,6 @@ package nl.knaw.huygens.alexandria.creole
  * #L%
  */
 
-import nl.knaw.huygens.alexandria.AlexandriaAssertions.assertThat
 import nl.knaw.huygens.alexandria.creole.Basics.qName
 import nl.knaw.huygens.alexandria.creole.Constructors.concur
 import nl.knaw.huygens.alexandria.creole.Constructors.concurOneOrMore
@@ -37,6 +36,7 @@ import nl.knaw.huygens.alexandria.creole.NameClasses.name
 import nl.knaw.huygens.alexandria.creole.events.Events
 import org.junit.Ignore
 import org.junit.Test
+import org.assertj.core.api.Assertions.assertThat
 import org.slf4j.LoggerFactory
 
 class DerivativesTest : CreoleTest() {

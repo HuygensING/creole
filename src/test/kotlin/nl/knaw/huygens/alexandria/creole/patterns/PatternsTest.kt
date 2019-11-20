@@ -2,7 +2,7 @@ package nl.knaw.huygens.alexandria.creole.patterns
 
 /*-
      * #%L
- * alexandria-markup-core
+ * creole
  * =======
  * Copyright (C) 2016 - 2019 HuC DI (KNAW)
  * =======
@@ -20,7 +20,7 @@ package nl.knaw.huygens.alexandria.creole.patterns
  * #L%
      */
 
-import nl.knaw.huygens.alexandria.AlexandriaAssertions.assertThat
+import org.assertj.core.api.Assertions.assertThat
 import nl.knaw.huygens.alexandria.creole.CreoleTest
 import nl.knaw.huygens.alexandria.creole.NameClass
 import nl.knaw.huygens.alexandria.creole.NameClasses.name

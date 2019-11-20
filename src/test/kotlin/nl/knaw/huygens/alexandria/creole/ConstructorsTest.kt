@@ -2,7 +2,7 @@ package nl.knaw.huygens.alexandria.creole
 
 /*
  * #%L
- * alexandria-markup-core
+ * creole
  * =======
  * Copyright (C) 2016 - 2019 HuC DI (KNAW)
  * =======
@@ -20,7 +20,6 @@ package nl.knaw.huygens.alexandria.creole
  * #L%
  */
 
-import nl.knaw.huygens.alexandria.AlexandriaAssertions.assertThat
 import nl.knaw.huygens.alexandria.creole.Constructors.after
 import nl.knaw.huygens.alexandria.creole.Constructors.all
 import nl.knaw.huygens.alexandria.creole.Constructors.concur
@@ -33,6 +32,8 @@ import nl.knaw.huygens.alexandria.creole.patterns.*
 import nl.knaw.huygens.alexandria.creole.patterns.Patterns.EMPTY
 import nl.knaw.huygens.alexandria.creole.patterns.Patterns.NOT_ALLOWED
 import org.junit.Test
+import org.assertj.core.api.Assertions.assertThat
+
 
 class ConstructorsTest : CreoleTest() {
 
