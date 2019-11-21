@@ -22,7 +22,7 @@ package nl.knaw.huc.di.rd.tag.creole.events
 import nl.knaw.huc.di.rd.tag.creole.Basics
 import nl.knaw.huc.di.rd.tag.creole.Pattern
 
-@Deprecated("")
+//@Deprecated("")
 class StartTagEvent(qName: Basics.QName, id: Basics.Id) : TagEvent(qName, id) {
 
     override fun eventDeriv(p: Pattern): Pattern {
