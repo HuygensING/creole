@@ -59,7 +59,8 @@ class LMNLTokenizerTest {
     private fun parseEscapedTagDelimiter(lmnl: String) {
         println(lmnl)
         val lmnlReader = Reader.string(lmnl)
-        val result = escapedSpecialChar(lmnlReader)
+        val p = escapedSpecialChar thenLeft eos()
+        val result = p(lmnlReader)
         println(result)
         assertThat(result is Accept).isTrue()
         assertThat((result as Accept).value).isEqualTo(lmnl)

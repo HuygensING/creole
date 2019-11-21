@@ -27,8 +27,7 @@ object LMNLTokenizer {
     val text = (not(specialChar).map { it.toString() } or escapedSpecialChar).rep
             .map { textEvent(it.joinToString(separator = "")) }
 
-    val lmnlParser = ((startTag or text or endTag).optrep then eos())
-            .map { it.first }
+    val lmnlParser = ((startTag or text or endTag).rep thenLeft eos())
 
     fun tokenize(lmnl: String): List<Event> {
         val lmnlReader = Reader.string(lmnl)
@@ -36,6 +35,5 @@ object LMNLTokenizer {
         println(result)
         return result.fold({ it.value }, { listOf() })
     }
-
 
 }
