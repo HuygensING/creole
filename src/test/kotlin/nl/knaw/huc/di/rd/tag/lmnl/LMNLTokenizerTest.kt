@@ -1,5 +1,6 @@
 package nl.knaw.huc.di.rd.tag.lmnl
 
+import arrow.core.Either
 import lambdada.parsec.io.Reader
 import lambdada.parsec.parser.*
 import lambdada.parsec.parser.Response.Accept
@@ -20,11 +21,14 @@ class LMNLTokenizerTest {
 
     @Test
     fun tokenizeTest1() {
-        val events = tokenize("[hello}World!{hello]")
+        val result = tokenize("[hello}World!{hello]")
         val startTagEvent = startTagEvent(qName("hello"))
         val textEvent = textEvent("World!")
         val endTagEvent = endTagEvent(qName("hello"))
-        assertThat(events.toString()).isEqualTo(listOf(startTagEvent, textEvent, endTagEvent).toString())
+        when (result) {
+            is Either.Left -> fail("Parsing failed: ${result.a}")
+            is Either.Right -> assertThat(result.b.toString()).isEqualTo(listOf(startTagEvent, textEvent, endTagEvent).toString())
+        }
     }
 
     @Test

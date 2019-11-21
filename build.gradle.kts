@@ -36,7 +36,7 @@ dependencies {
     implementation("org.apache.commons:commons-lang3:3.9")
 
     // Use Arrow for fp
-    val arrowVersion = "0.10.2"
+    val arrowVersion = "0.10.3"
     implementation("io.arrow-kt:arrow-core:${arrowVersion}")
     implementation("io.arrow-kt:arrow-core-data:${arrowVersion}")
 

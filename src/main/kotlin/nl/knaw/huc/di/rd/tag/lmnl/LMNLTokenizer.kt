@@ -1,8 +1,10 @@
 package nl.knaw.huc.di.rd.tag.lmnl
 
+import arrow.core.Either
 import lambdada.parsec.extension.charsToString
 import lambdada.parsec.io.Reader
 import lambdada.parsec.parser.*
+import lambdada.parsec.parser.Response.Reject
 import nl.knaw.huc.di.rd.tag.creole.Basics.qName
 import nl.knaw.huc.di.rd.tag.creole.Event
 import nl.knaw.huc.di.rd.tag.creole.events.Events.endTagEvent
@@ -29,11 +31,11 @@ object LMNLTokenizer {
 
     val lmnlParser = ((startTag or text or endTag).rep thenLeft eos())
 
-    fun tokenize(lmnl: String): List<Event> {
+    fun tokenize(lmnl: String): Either<Reject<Char, List<Event>>, List<Event>> {
         val lmnlReader = Reader.string(lmnl)
         val result = lmnlParser(lmnlReader)
         println(result)
-        return result.fold({ it.value }, { listOf() })
+        return result.fold({ Either.right(it.value) }, { Either.left(it) })
     }
 
 }
