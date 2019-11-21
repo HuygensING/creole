@@ -3,6 +3,7 @@
  *
  * This generated file contains a sample Kotlin library project to get you started.
  */
+val deployerJars by configurations.creating
 
 plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin.
@@ -10,6 +11,8 @@ plugins {
 
     // Apply the java-library plugin for API and implementation separation.
     `java-library`
+    `maven-publish`
+    maven
 }
 
 repositories {
@@ -22,6 +25,8 @@ repositories {
 }
 
 dependencies {
+    deployerJars("org.apache.maven.wagon:wagon-ssh:2.2")
+
     // Align versions of all Kotlin components
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
 
@@ -29,7 +34,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
     // Use parsec.
-//    implementation("lambdada:parsec:1.0")
+    implementation("lambdada:parsec:1.0")
 
     implementation("nl.knaw.huygens:visitei:0.6.2")
     implementation("org.slf4j:slf4j-api:1.8.0-beta4")
@@ -49,4 +54,41 @@ dependencies {
     testImplementation("org.assertj:assertj-core:3.12.2")
     testImplementation("commons-io:commons-io:2.6")
     testImplementation("nl.knaw.huygens.alexandria:alexandria-markup-core:2.3")
+}
+
+tasks.named<Upload>("uploadArchives") {
+    repositories.withGroovyBuilder {
+        "mavenDeployer" {
+            setProperty("configuration", deployerJars)
+            "repository"("url" to "scp://n-195-169-89-50.diginfra.net:/data/html/repository") {
+                "authentication"("userName" to System.getenv("USER"), "password" to System.getenv("PASSWORD"))
+            }
+        }
+    }
+}
+
+//java {
+//    withJavadocJar()
+//    withSourcesJar()
+//}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "nl.knaw.huc.di.rd.tag"
+            artifactId = "creole"
+            version = "1.0"
+
+            from(components["java"])
+        }
+    }
+    repositories {
+        maven {
+            // change to point to your repo, e.g. http://my.org/repo
+            url = uri("$buildDir/repo")
+        }
+//        maven {
+//            url = uri("sftp://n-195-169-89-50.diginfra.net:/data/html/repository")
+//        }
+    }
 }
