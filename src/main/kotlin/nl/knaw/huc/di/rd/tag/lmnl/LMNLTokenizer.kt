@@ -8,31 +8,27 @@ import nl.knaw.huc.di.rd.tag.creole.Event
 import nl.knaw.huc.di.rd.tag.creole.events.Events.endTagEvent
 import nl.knaw.huc.di.rd.tag.creole.events.Events.startTagEvent
 import nl.knaw.huc.di.rd.tag.creole.events.Events.textEvent
-import nl.knaw.huc.di.rd.tag.creole.events.StartTagEvent
 
 object LMNLTokenizer {
-    private fun escaped(c: Char) = char('\\') then char(c)
+    val specialChar = charIn("""[]{}\""")
 
-    val tagDelimiter = charIn("[]{}")
+    val escapedSpecialChar = (char('\\') then specialChar)
+            .map { "${it.first}${it.second}" }
 
-    val escapedTagDelimiter = escaped('[') or escaped(']') or escaped('{') or escaped('}')
+    val tagName = charIn(CharRange('a', 'z')).rep
+            .map { it.charsToString() }
 
-    val tagName = charIn(CharRange('a', 'z')).rep.map { it.charsToString() }
+    val startTag = (char('[') thenRight tagName thenLeft char('}'))
+            .map { startTagEvent(qName(it)) }
 
-    val startTag = (char('[') thenRight tagName thenLeft char('}')).map { startTagEvent(qName(it)) }
+    val endTag = (char('{') thenRight tagName thenLeft char(']'))
+            .map { endTagEvent(qName(it)) }
 
-    val endTag = (char('{') thenRight tagName thenLeft char(']')).map { endTagEvent(qName(it)) }
+    val text = (not(specialChar).map { it.toString() } or escapedSpecialChar).rep
+            .map { textEvent(it.joinToString(separator = "")) }
 
-    val text = (not(tagDelimiter) /*or escapedTagDelimiter*/).rep.map { textEvent(it.charsToString()) }
-
-    val lmnlParser = (startTag then (startTag or text or endTag).optrep then eos()).map { toEventList(it) }
-//    val lmnlParser = (startTag then text then endTag then eos()).map { listOf(it.first.first.first, it.first.first.second, it.first.second) }
-
-    private fun toEventList(pair: Pair<Pair<StartTagEvent, List<Event>>, Unit>): List<Event> {
-        return mutableListOf<Event>(pair.first.first).also {
-            it.addAll(pair.first.second)
-        }
-    }
+    val lmnlParser = ((startTag or text or endTag).optrep then eos())
+            .map { it.first }
 
     fun tokenize(lmnl: String): List<Event> {
         val lmnlReader = Reader.string(lmnl)
