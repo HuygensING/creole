@@ -20,12 +20,14 @@ package nl.knaw.huc.di.rd.tag.creole
  * #L%
      */
 
+import arrow.core.getOrHandle
 import nl.knaw.huc.di.rd.tag.creole.CreoleAssertions.assertThat
+import nl.knaw.huc.di.rd.tag.lmnl.LMNLTokenizer.tokenize
 import nl.knaw.huygens.alexandria.lmnl.importer.LMNLSyntaxError
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.filefilter.IOFileFilter
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Ignore
+import org.assertj.core.api.Assertions.fail
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -36,7 +38,7 @@ import java.io.IOException
 @RunWith(Parameterized::class)
 class ValidLMNLTest(private val basename: String) : CreoleTest() {
 
-    @Ignore
+    //    @Ignore
     @Test
     @Throws(IOException::class, LMNLSyntaxError::class)
     fun testCreoleFile() {
@@ -56,7 +58,12 @@ class ValidLMNLTest(private val basename: String) : CreoleTest() {
 
         val lmnl = FileUtils.readFileToString(File("$LMNL_DIR$basename.lmnl"), "UTF-8")
         LOG.info("lmnl=\n{}", lmnl)
-        val events = LMNLImporter().importLMNL(lmnl)
+
+//        val events = LMNLImporter().importLMNL(lmnl)
+
+        val parseResult = tokenize(lmnl)
+        val events = parseResult.getOrHandle { fail("lmnl parsing failed: ${parseResult}") }
+
         val validator = Validator.ofPattern(schema)
         val result = validator.validate(events)
         assertThat(result).isSuccess

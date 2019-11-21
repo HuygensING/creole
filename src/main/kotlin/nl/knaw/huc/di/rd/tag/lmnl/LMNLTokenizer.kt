@@ -12,12 +12,12 @@ import nl.knaw.huc.di.rd.tag.creole.events.Events.startTagEvent
 import nl.knaw.huc.di.rd.tag.creole.events.Events.textEvent
 
 object LMNLTokenizer {
-    val specialChar = charIn("""[]{}\""")
+    private val specialChar = charIn("""[]{}\""")
 
     val escapedSpecialChar = (char('\\') then specialChar)
             .map { "${it.first}${it.second}" }
 
-    val tagName = charIn(CharRange('a', 'z')).rep
+    private val tagName = charIn(CharRange('a', 'z')).rep
             .map { it.charsToString() }
 
     val startTag = (char('[') thenRight tagName thenLeft char('}'))
@@ -33,9 +33,11 @@ object LMNLTokenizer {
 
     fun tokenize(lmnl: String): Either<Reject<Char, List<Event>>, List<Event>> {
         val lmnlReader = Reader.string(lmnl)
-        val result = lmnlParser(lmnlReader)
-        println(result)
-        return result.fold({ Either.right(it.value) }, { Either.left(it) })
+        return lmnlParser(lmnlReader)
+                .fold(
+                        { Either.right(it.value) },
+                        { Either.left(it) }
+                )
     }
 
 }

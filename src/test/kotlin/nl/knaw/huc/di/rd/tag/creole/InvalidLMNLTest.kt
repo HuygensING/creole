@@ -53,7 +53,10 @@ class InvalidLMNLTest(private val basename: String) : CreoleTest() {
         assertThat(schema).isNotNull
 
         val lmnl = FileUtils.readFileToString(File("$LMNL_DIR$basename.lmnl"), "UTF-8")
+        LOG.info("lmnl=\n{}", lmnl)
         val events = LMNLImporter().importLMNL(lmnl)
+//        val parseResult = LMNLTokenizer.tokenize(lmnl)
+//        val events = parseResult.getOrHandle { Assertions.fail("lmnl parsing failed: ${parseResult}") }
         val validator = Validator.ofPattern(schema)
         val result = validator.validate(events)
         assertThat(result).isFailure
