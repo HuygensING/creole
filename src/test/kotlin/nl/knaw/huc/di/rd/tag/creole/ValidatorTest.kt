@@ -34,8 +34,11 @@ import nl.knaw.huc.di.rd.tag.creole.Constructors.range
 import nl.knaw.huc.di.rd.tag.creole.Constructors.text
 import nl.knaw.huc.di.rd.tag.creole.Constructors.zeroOrMore
 import nl.knaw.huc.di.rd.tag.creole.CreoleAssertions.assertThat
+import nl.knaw.huc.di.rd.tag.creole.NameClasses.ANY_NAME
 import nl.knaw.huc.di.rd.tag.creole.NameClasses.name
 import nl.knaw.huc.di.rd.tag.creole.events.Events
+import nl.knaw.huc.di.rd.tag.creole.patterns.Patterns.WELLFORMED
+import nl.knaw.huc.di.rd.tag.creole.patterns.Text
 import nl.knaw.huygens.tei.Document
 import org.apache.commons.io.FileUtils
 import org.junit.Ignore
@@ -46,6 +49,10 @@ import java.io.IOException
 
 class ValidatorTest {
     private val LOG = LoggerFactory.getLogger(javaClass)
+
+    fun wellFormednessSchema(): Pattern {
+        return Constructors.partition(range(ANY_NAME, Text()))
+    }
 
     @Test
     fun testValidator() {
@@ -69,6 +76,15 @@ class ValidatorTest {
         val invalidEvents = listOf(textE, startE, startE, endE)
         val validationResult = validator.validate(invalidEvents)
         assertThat(validationResult).isFailure.hasUnexpectedEvent(textE)
+
+        val validator2 = Validator.ofPattern(WELLFORMED)
+        val validationResult2 = validator2.validate(validEvents)
+        assertThat(validationResult2).isSuccess.hasNoUnexpectedEvent()
+
+        val invalidEvents2 = listOf(textE, startE, startE, endE)
+        val validationResult3 = validator2.validate(invalidEvents)
+        assertThat(validationResult3).isFailure.hasUnexpectedEvent(textE)
+
     }
 
     @Test
@@ -95,6 +111,10 @@ class ValidatorTest {
         val validEvents = listOf(startE, textE, startBoldE, boldTextE, endBoldE, textE, endE)
 
         assertThat(validator.validate(validEvents)).isSuccess.hasNoUnexpectedEvent()
+
+        val validator2 = Validator.ofPattern(WELLFORMED)
+        assertThat(validator2.validate(validEvents)).isSuccess.hasNoUnexpectedEvent()
+
     }
 
     // test cases from Jeni's validate-lmnl.xsl
@@ -813,6 +833,10 @@ class ValidatorTest {
     private fun assertValidationSucceeds(schema: Pattern, events: List<Event>) {
         val validationResult = validate(schema, events)
         assertThat(validationResult)
+                .isSuccess
+                .hasNoUnexpectedEvent()
+        val validationResult2 = validate(WELLFORMED, events)
+        assertThat(validationResult2)
                 .isSuccess
                 .hasNoUnexpectedEvent()
     }

@@ -35,6 +35,7 @@ import nl.knaw.huc.di.rd.tag.creole.Constructors.zeroOrMore
 import nl.knaw.huc.di.rd.tag.creole.CreoleAssertions.assertThat
 import nl.knaw.huc.di.rd.tag.creole.NameClasses.name
 import nl.knaw.huc.di.rd.tag.creole.events.Events
+import nl.knaw.huc.di.rd.tag.creole.patterns.Patterns.WELLFORMED
 import org.junit.Ignore
 import org.junit.Test
 import org.slf4j.LoggerFactory
@@ -234,6 +235,9 @@ class DerivativesTest : CreoleTest() {
 //        LOG.info("expected events: {}", expectedEvents(pattern1).map(Event::toString).sorted().distinct()));
 //        LOG.info("{}({},{})", pattern1.javaClass.simpleName, (pattern1 as After).pattern1, (pattern1 as After).pattern2 )
         assertThat(pattern1).isNullable
+        val pattern2 = Validator(WELLFORMED).eventsDeriv(WELLFORMED, events)
+        assertThat(pattern2).isNullable
+
     }
 
     private fun assertEventsAreInvalidForSchema(schemaPattern: Pattern, events: List<Event>) {

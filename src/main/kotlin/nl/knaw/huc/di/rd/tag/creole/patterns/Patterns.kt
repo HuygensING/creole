@@ -20,12 +20,20 @@ package nl.knaw.huc.di.rd.tag.creole.patterns
  * #L%
      */
 
+import nl.knaw.huc.di.rd.tag.creole.Constructors.choice
+import nl.knaw.huc.di.rd.tag.creole.Constructors.concurOneOrMore
+import nl.knaw.huc.di.rd.tag.creole.Constructors.concurZeroOrMore
+import nl.knaw.huc.di.rd.tag.creole.Constructors.mixed
+import nl.knaw.huc.di.rd.tag.creole.Constructors.range
+import nl.knaw.huc.di.rd.tag.creole.NameClasses.anyName
 import nl.knaw.huc.di.rd.tag.creole.Pattern
 
 object Patterns {
     val EMPTY: Pattern = Empty()
     val NOT_ALLOWED: Pattern = NotAllowed()
     val TEXT: Pattern = Text()
+    val WELLFORMED0 = concurZeroOrMore(mixed(range(anyName(), TEXT)))
+    val WELLFORMED = concurOneOrMore(range(anyName(), choice(TEXT, WELLFORMED0)))
 
     /*
   A Pattern represents a pattern after simplification.

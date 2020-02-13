@@ -31,8 +31,7 @@ abstract class AbstractPattern : Pattern {
 
     var hashcode = javaClass.hashCode()
 
-    override
-    val isNullable: Boolean
+    override val isNullable: Boolean
         get() {
             if (nullable == null) {
                 init()
